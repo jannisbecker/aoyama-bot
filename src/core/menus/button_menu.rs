@@ -68,10 +68,10 @@ where
                     .components(|c| self.build_action_row(c))
             })
             .await?
-            .message()
+            .into_message()
             .await?;
 
-        while let Some(mci) = CollectComponentInteraction::new(ctx.discord())
+        while let Some(mci) = CollectComponentInteraction::new(ctx)
             .message_id(msg.id)
             .timeout(Duration::from_secs(60))
             .await
@@ -91,7 +91,7 @@ where
                 _ => (),
             }
 
-            msg.edit(ctx.discord(), |m| {
+            msg.edit(ctx, |m| {
                 m.embed(|e| self.build_embed(e))
                     .components(|c| self.build_action_row(c))
             })
@@ -101,10 +101,8 @@ where
         }
 
         // Remove action buttons on "Done" click or after timeout
-        msg.edit(ctx.discord(), |m| {
-            m.components(|c| c.set_action_rows(vec![]))
-        })
-        .await?;
+        msg.edit(ctx, |m| m.components(|c| c.set_action_rows(vec![])))
+            .await?;
 
         Ok(())
     }

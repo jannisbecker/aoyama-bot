@@ -2,6 +2,10 @@ version: "3.5"
 
 services:
   aoyama-bot:
-    build: .
+    build: 
+      context: .
+      dockerfile: Containerfile
     container_name: aoyama-bot
+    env_file:
+      - .env
     restart: always

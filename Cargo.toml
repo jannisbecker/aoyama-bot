@@ -9,7 +9,7 @@ edition = "2021"
 anyhow = "1.0.58"
 async-trait = "0.1.56"
 dotenv = "0.15.0"
-poise = "0.2.2"
+poise = "0.5.5"
 reqwest = "0.11.11"
 serde = { version = "1.0.137", default-features = false, features = ["derive", "std"] }
 tokio = { version = "1.19.2", features = ["rt-multi-thread", "macros"] }
